@@ -1,0 +1,148 @@
+CREATE TABLE Customer (
+    CustomerId INT PRIMARY KEY,
+    CustomerName VARCHAR(100),
+    Gender CHAR(1),
+    Phone VARCHAR(15),
+    Email VARCHAR(100),
+    City VARCHAR(50)
+);
+
+CREATE TABLE Agent (
+    AgentId INT PRIMARY KEY,
+    AgentName VARCHAR(100),
+    Phone VARCHAR(15),
+    Branch VARCHAR(50)
+);
+
+CREATE TABLE Policy (
+    PolicyId INT PRIMARY KEY,
+    PolicyName VARCHAR(100),
+    PolicyType VARCHAR(50),
+    PremiumAmount DECIMAL(10,2),
+    CoverageAmount DECIMAL(12,2)
+);
+
+CREATE TABLE PolicyPurchase (
+    PurchaseId INT PRIMARY KEY,
+    CustomerId INT,
+    PolicyId INT,
+    AgentId INT,
+    PurchaseDate DATE,
+    PolicyTerm INT,
+    FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId),
+    FOREIGN KEY (PolicyId) REFERENCES Policy(PolicyId),
+    FOREIGN KEY (AgentId) REFERENCES Agent(AgentId)
+);
+
+-- =========================
+-- CUSTOMER DATA (15 Records)
+-- =========================
+
+INSERT INTO Customer VALUES
+(101, 'Rahul Sharma', 'M', '9876543210', 'rahul.sharma@gmail.com', 'Mumbai'),
+(102, 'Priya Verma', 'F', '9876543211', 'priya.verma@gmail.com', 'Delhi'),
+(103, 'Amit Patel', 'M', '9876543212', 'amit.patel@gmail.com', 'Ahmedabad'),
+(104, 'Sneha Reddy', 'F', '9876543213', 'sneha.reddy@gmail.com', 'Hyderabad'),
+(105, 'Vikram Singh', 'M', '9876543214', 'vikram.singh@gmail.com', 'Jaipur'),
+(106, 'Ananya Iyer', 'F', '9876543215', 'ananya.iyer@gmail.com', 'Chennai'),
+(107, 'Karan Malhotra', 'M', '9876543216', 'karan.m@gmail.com', 'Pune'),
+(108, 'Neha Gupta', 'F', '9876543217', 'neha.gupta@gmail.com', 'Lucknow'),
+(109, 'Arjun Nair', 'M', '9876543218', 'arjun.nair@gmail.com', 'Kochi'),
+(110, 'Pooja Mehta', 'F', '9876543219', 'pooja.mehta@gmail.com', 'Surat'),
+(111, 'Rohit Agarwal', 'M', '9876543220', 'rohit.agarwal@gmail.com', 'Kolkata'),
+(112, 'Kavya Rao', 'F', '9876543221', 'kavya.rao@gmail.com', 'Bengaluru'),
+(113, 'Siddharth Jain', 'M', '9876543255', 'sid.jain@gmail.com', 'Indore'),
+(114, 'Meera Kapoor', 'F', '9876543223', 'meera.kapoor@gmail.com', 'Chandigarh'),
+(115, 'Nitin Joshi', 'M', '9876543224', 'nitin.joshi@gmail.com', 'Nagpur');
+
+-- =====================
+-- AGENT DATA (5 Records)
+-- =====================
+
+INSERT INTO Agent VALUES
+(201, 'Rakesh Kapoor', '9811111111', 'Mumbai Central'),
+(202, 'Sunita Menon', '9822222222', 'Hyderabad North'),
+(203, 'Ajay Khanna', '9833333333', 'Delhi South'),
+(204, 'Deepa Srinivas', '9844444444', 'Bengaluru East'),
+(205, 'Manoj Deshmukh', '9855555555', 'Pune West');
+
+-- =======================
+-- POLICY DATA (6 Records)
+-- =======================
+
+INSERT INTO Policy VALUES
+(301, 'Secure Life Plus', 'Life Insurance', 15000.00, 1000000.00),
+(302, 'Family Health Shield', 'Health Insurance', 12000.00, 500000.00),
+(303, 'Smart Retirement Plan', 'Pension Plan', 25000.00, 2000000.00),
+(304, 'Child Future Protect', 'Child Plan', 18000.00, 1200000.00),
+(305, 'Accident Care Elite', 'Accident Insurance', 8000.00, 750000.00),
+(306, 'Wealth Builder ULIP', 'Investment Plan', 22000.00, 1500000.00);
+
+-- ==================================
+-- POLICY PURCHASE DATA (25 Records)
+-- ==================================
+
+INSERT INTO PolicyPurchase VALUES
+(401, 101, 301, 201, '2024-01-15', 15),
+(402, 102, 302, 203, '2024-01-20', 1),
+(403, 103, 306, 202, '2024-02-05', 10),
+(404, 104, 301, 202, '2024-02-10', 20),
+(405, 105, 305, 201, '2024-02-18', 5),
+(406, 106, 304, 204, '2024-03-01', 18),
+(407, 107, 302, 205, '2024-03-12', 1),
+(408, 108, 301, 203, '2024-03-18', 25),
+(409, 109, 306, 204, '2024-04-05', 12),
+(410, 110, 303, 201, '2024-04-20', 15),
+(411, 111, 302, 203, '2024-05-03', 1),
+(412, 112, 305, 204, '2024-05-15', 3),
+(413, 113, 301, 205, '2024-05-25', 20),
+(414, 114, 304, 202, '2024-06-08', 15),
+(415, 115, 306, 201, '2024-06-19', 10),
+(416, 101, 302, 203, '2024-07-01', 1),
+(417, 103, 305, 202, '2024-07-09', 2),
+(418, 105, 303, 205, '2024-07-16', 18),
+(419, 107, 301, 204, '2024-08-02', 25),
+(420, 109, 302, 201, '2024-08-11', 1),
+(421, 110, 304, 202, '2024-08-25', 15),
+(422, 111, 306, 203, '2024-09-05', 10),
+(423, 112, 303, 204, '2024-09-18', 20),
+(424, 114, 305, 205, '2024-10-01', 5),
+(425, 115, 301, 201, '2024-10-14', 30);
+
+
+-- Select * from Customer;
+
+-- Select CustomerName,Phone,City from Customer;
+
+-- select * from Policy where PremiumAmount >20000;
+
+-- select * from Customer where City like "Hyderabad";
+
+-- select * from Policy order by PremiumAmount;
+
+-- select * from Policy order by PremiumAmount desc limit 3;
+
+-- select * from Customer where CustomerName like "A%";
+
+-- select * from Agent where Branch like "D%";
+
+-- select * from Policy where PremiumAmount >15000 and PremiumAmount < 30000;
+
+-- select * from Customer where City in ("Hyderabad","Pune","Chennai");
+
+-- select * from Policy where PolicyType not like "Life %";
+
+-- select * from Customer where Phone like "%55";
+
+-- select c.CustomerName , p.PolicyName , x.PurchaseDate from Customer c, Policy p, PolicyPurchase x where p.PolicyId = x.PolicyId and c.CustomerId = x.CustomerId order by CustomerName ;
+
+-- select * from Customer c,PolicyPurchase p  where c.CustomerId = p.CustomerId and p.PolicyId = 301;
+
+-- select a.AgentName,p.PolicyName from Agent a,PolicyPurchase p1, Policy p  where a.AgentId = p1.AgentId and p.PolicyId = p1.PolicyId;
+
+-- select c.CustomerName , p.PolicyName , p.PremiumAmount from Customer c, Policy p, PolicyPurchase x where p.PolicyId = x.PolicyId and c.CustomerId = x.CustomerId order by CustomerName ;
+
+-- select a.AgentName,count(a.AgentName) from Agent a,PolicyPurchase p1, Policy p  where a.AgentId = p1.AgentId and p.PolicyId = p1.PolicyId group by a.AgentName;
+
+select c.CustomerName , count(c.CustomerName) from Customer c, PolicyPurchase x where c.CustomerId = x.CustomerId group by c.CustomerName order by count(CustomerName) desc ;
+
